@@ -112,7 +112,7 @@
     #define X_MIN_PIN                          3  // X-
   #endif
   #ifndef X_MAX_PIN
-    #define X_MAX_PIN                          2  // X+
+    #define X_MAX_PIN                         18  // X+ 2 m4rco
   #endif
 #endif
 #ifndef Y_STOP_PIN
@@ -125,7 +125,7 @@
 #endif
 #ifndef Z_STOP_PIN
   #ifndef Z_MIN_PIN
-    #define Z_MIN_PIN                         18  // Z-
+    #define Z_MIN_PIN                          2  // Z- 18 m4rco
   #endif
   #ifndef Z_MAX_PIN
     #define Z_MAX_PIN                         19  // Z+
@@ -343,7 +343,7 @@
    * Serial2 -- TX2 = D16   RX2 = D17 (AUX4-18 and AUX4-17)
    * Serial3 -- TX3 = D14   RX3 = D15 (Available on some RAMPS-like boards)
    */
-  //#define X_HARDWARE_SERIAL Serial1
+  #define X_HARDWARE_SERIAL Serial1
   //#define X2_HARDWARE_SERIAL Serial1
   //#define Y_HARDWARE_SERIAL Serial1
   //#define Y2_HARDWARE_SERIAL Serial1
@@ -359,7 +359,7 @@
     #define X_SERIAL_TX_PIN                   40
   #endif
   #ifndef X_SERIAL_RX_PIN
-    #define X_SERIAL_RX_PIN                   63
+    #define X_SERIAL_RX_PIN                   12
   #endif
   #ifndef X2_SERIAL_TX_PIN
     #define X2_SERIAL_TX_PIN                  -1
