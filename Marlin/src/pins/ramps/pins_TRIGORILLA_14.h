@@ -117,14 +117,14 @@
   #define Y_STOP_PIN                          19  // Z+
 #elif ANY(TRIGORILLA_MAPPING_CHIRON, TRIGORILLA_MAPPING_I3MEGA)
   // Chiron uses AUX header for Y and Z endstops
-  #define Y_STOP_PIN                          42  // AUX (1)
-  #define Z_STOP_PIN                          43  // AUX (2)
+  #define Y_STOP_PIN                          43  // AUX (1) 42
+  #define Z_STOP_PIN                          42  // AUX (2) 43
   #ifndef Z2_STOP_PIN
-     #define Z2_STOP_PIN                      18  // Z-
+     #define Z2_STOP_PIN                      18  // Z- 
   #endif
 
   #ifndef Z_MIN_PROBE_PIN
-    #define Z_MIN_PROBE_PIN                    2  // X+
+    #define Z_MIN_PROBE_PIN                   21  // X+ 2
   #endif
 
   #define CONTROLLER_FAN_PIN            FAN1_PIN
@@ -168,16 +168,16 @@
 
 #if HAS_TMC_UART
   #ifndef X_SERIAL_TX_PIN
-    #define X_SERIAL_TX_PIN           SERVO1_PIN
+    #define X_SERIAL_TX_PIN                   12
   #endif
   #ifndef Y_SERIAL_TX_PIN
-    #define Y_SERIAL_TX_PIN           SERVO0_PIN
+    #define Y_SERIAL_TX_PIN                   -1
   #endif
   #ifndef Z_SERIAL_TX_PIN
-    #define Z_SERIAL_TX_PIN           SERVO3_PIN
+    #define Z_SERIAL_TX_PIN                   -1
   #endif
   #ifndef E0_SERIAL_TX_PIN
-    #define E0_SERIAL_TX_PIN          SERVO2_PIN
+    #define E0_SERIAL_TX_PIN                  -1
   #endif
 #endif
 

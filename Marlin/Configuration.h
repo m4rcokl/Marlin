@@ -24,8 +24,8 @@
 #define CONFIG_EXAMPLES_DIR "AnyCubic/i3 Mega/Trigorilla AVR"
 
 //#define I3MEGA_PRO_STOCK
-//#define I3MEGA_HAS_BLTOUCH
-//#define I3MEGA_HAS_TMC2208
+#define I3MEGA_HAS_BLTOUCH    // m4rco
+#define I3MEGA_HAS_TMC2208    // m4rco
 
 /**
  * Configuration.h
@@ -67,7 +67,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(none, default config)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(m4rco.)" // Who made the changes. m4rco
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -152,7 +152,7 @@
 /**
  * Some Anycubic machines have Z1 and Z2 swapped to save on wiring.
  */
-//#define SWAP_Z_MOTORS
+#define SWAP_Z_MOTORS   // m4rco
 
 // Name displayed in the LCD "Ready" message and Info menu
 #define CUSTOM_MACHINE_NAME "Anycubic i3"
@@ -188,7 +188,7 @@
   #else
     #define ELSE_DRIVER_TYPE A4988
   #endif
-  #define X_DRIVER_TYPE ELSE_DRIVER_TYPE
+  #define X_DRIVER_TYPE TMC2209
   #define Y_DRIVER_TYPE ELSE_DRIVER_TYPE
 #endif
 #define Z_DRIVER_TYPE  ELSE_DRIVER_TYPE
@@ -730,9 +730,9 @@
     #define DEFAULT_Ki_LIST {   1.17,   1.17 }
     #define DEFAULT_Kd_LIST {  54.19,  54.19 }
   #else
-    #define DEFAULT_Kp  15.94
-    #define DEFAULT_Ki   1.17
-    #define DEFAULT_Kd  54.19
+    #define DEFAULT_Kp  30.60 // 15.94 m4rco
+    #define DEFAULT_Ki   2.47 // 1.17 m4rco
+    #define DEFAULT_Kd  94.65 // 54.19 m4rco
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -819,9 +819,9 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   // Anycubic i3 Mega Ultrabase (0.9Ω @ 22°C)
-  #define DEFAULT_bedKp 251.78
-  #define DEFAULT_bedKi 49.57
-  #define DEFAULT_bedKd 319.73
+  #define DEFAULT_bedKp 124.02 // 251.78 m4rco
+  #define DEFAULT_bedKi 18.92 // 49.57 m4rco
+  #define DEFAULT_bedKd 541.86 // 319.73m4rco
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -921,8 +921,8 @@
 
 #define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
 #define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
-#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
-#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
+//#define THERMAL_PROTECTION_CHAMBER // Enable thermal protection for the heated chamber
+//#define THERMAL_PROTECTION_COOLER  // Enable thermal protection for the laser cooling
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -1242,10 +1242,10 @@
  *
  * :[2,3,4,5,6,7]
  */
-//#define ENDSTOP_NOISE_THRESHOLD 2
+#define ENDSTOP_NOISE_THRESHOLD 2
 
 // Check for stuck or disconnected endstops during homing moves.
-//#define DETECT_BROKEN_ENDSTOP
+#define DETECT_BROKEN_ENDSTOP
 
 //=============================================================================
 //============================== Movement Settings ============================
@@ -1277,7 +1277,7 @@
   // Anycubic stock firmware defaults E0 steps to 384, but this is WAY out
   #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 410 }
 #else
-  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.2 }
+  #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 404.6 }
 #endif
 
 /**
@@ -1285,7 +1285,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 60 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 8, 60 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1298,7 +1298,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 2000,  60, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000,  60, 10000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1331,7 +1331,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-//#define CLASSIC_JERK
+#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -1374,7 +1374,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1606,7 +1606,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -23, -1.54 }
+#define NOZZLE_TO_PROBE_OFFSET { 21, -17, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1673,7 +1673,7 @@
  * A total of 3 or more adds more slow probes, taking the average.
  */
 #define MULTIPLE_PROBING 2
-#define EXTRA_PROBING    1
+//#define EXTRA_PROBING    1
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1689,7 +1689,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE    5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING           5 // Z position after probing is done
@@ -1697,8 +1697,8 @@
 #define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -20
-#define Z_PROBE_OFFSET_RANGE_MAX 20
+#define Z_PROBE_OFFSET_RANGE_MIN -25
+#define Z_PROBE_OFFSET_RANGE_MAX 25
 
 // Enable the M48 repeatability test to test probe accuracy
 #if ENABLED(I3MEGA_HAS_BLTOUCH)
@@ -1775,10 +1775,10 @@
   #define INVERT_X_DIR false // Mega Pro stock configuration has TMC2208 on X/Y
   #define INVERT_Y_DIR true  // with non-reversed connectors
 #else
-  #define INVERT_X_DIR true  // set to true for stock drivers or TMC2208 with reversed connectors
-  #define INVERT_Y_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+  #define INVERT_X_DIR false  // set to true for stock drivers or TMC2208 with reversed connectors
+  #define INVERT_Y_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
 #endif
-#define INVERT_Z_DIR false // set to false for stock drivers or TMC2208 with reversed connectors
+#define INVERT_Z_DIR true // set to false for stock drivers or TMC2208 with reversed connectors
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -1789,7 +1789,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1845,7 +1845,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 210
+#define X_BED_SIZE 220
 #define Y_BED_SIZE 210
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
@@ -1854,7 +1854,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 205
+#define Z_MAX_POS 195
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1922,7 +1922,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR
+//#define FILAMENT_RUNOUT_SENSOR
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -2119,7 +2119,7 @@
    */
   #define ENABLE_LEVELING_FADE_HEIGHT
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
-    #define DEFAULT_LEVELING_FADE_HEIGHT 10.0 // (mm) Default fade height.
+    #define DEFAULT_LEVELING_FADE_HEIGHT  0.0 // (mm) Default fade height.
   #endif
 
   /**
@@ -2139,7 +2139,7 @@
   /**
    * Enable the G26 Mesh Validation Pattern tool.
    */
-  #define G26_MESH_VALIDATION
+  //#define G26_MESH_VALIDATION
   #if ENABLED(G26_MESH_VALIDATION)
     #define MESH_TEST_NOZZLE_SIZE    0.4  // (mm) Diameter of primary nozzle.
     #define MESH_TEST_LAYER_HEIGHT   0.2  // (mm) Default layer height for G26.
@@ -2404,7 +2404,7 @@
 #define EEPROM_SETTINGS       // Persistent storage with M500 and M501
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
 #define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
-#define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
+//#define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
   //#define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.
   //#define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.
@@ -2419,7 +2419,7 @@
 // every couple of seconds when it can't accept commands.
 //
 #define HOST_KEEPALIVE_FEATURE        // Disable this if your host doesn't like keepalive messages
-#define DEFAULT_KEEPALIVE_INTERVAL 2  // Number of seconds between "busy" messages. Set with M113.
+#define DEFAULT_KEEPALIVE_INTERVAL 4  // Number of seconds between "busy" messages. Set with M113.
 #define BUSY_WHILE_HEATING            // Some hosts require "busy" messages even during heating
 
 // @section units
@@ -2691,7 +2691,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-#define SDSUPPORT
+//#define SDSUPPORT
 
 /**
  * SD CARD: ENABLE CRC
@@ -2706,7 +2706,7 @@
  * Disable all menus and only display the Status Screen, or
  * just remove some extraneous menu items to recover space.
  */
-//#define NO_LCD_MENUS
+#define NO_LCD_MENUS
 //#define SLIM_LCD_MENUS
 
 //
